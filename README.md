@@ -1,6 +1,6 @@
 # Kay Invoice
 
-![HomeView](Images/D-KayInvoice.png)\
+![HomeView](Images/D-KayInvoice.png)
 *Exemple d'une vue de la page d'acceuil*
 
 Kay Invoice est une application web légère et professionnelle conçue pour simplifier la facturation des auto-entrepreneurs et des artisans. Elle permet de créer, télécharger et partager des factures tout en offrant un système d’authentification sécurisé et une architecture maintenable et testable.
@@ -11,7 +11,7 @@ Kay Invoice est une application web légère et professionnelle conçue pour sim
 -  Public cible : auto-entrepreneurs, artisans, petites structures qui ont besoin d’un flux de facturation rapide et sans complexité.
 -  Principes suivis : séparation des responsabilités, code testable, sécurité des comptes, facilité de déploiement.
 -  
-  ![HomeView](Images/I--KayInvoice.png)\
+  ![HomeView](Images/I--KayInvoice.png)
 
 ## Fonctionnalités clés
 
@@ -31,12 +31,12 @@ Projet Domain (entités, interfaces)
 Projet Infrastructure (EF Core, implémentations des repositories, services d’export)
 Projet Identity (configuration Identity, gestion des politiques)
 
- ![HomeView](Images/R-KayInvoice.png)\
+ ![HomeView](Images/R-KayInvoice.png)
  
 - Services :
         - Service de génération PDF (séparé derrière une interface)
   
- ![HomeView](Images/I-KayInvoice.png)\
+ ![HomeView](Images/I-KayInvoice.png)
  
 - Sécurité :
         - Utilisation d’ASP.NET Core Identity pour le hashing et la gestion des comptes.
@@ -56,5 +56,5 @@ Projet Identity (configuration Identity, gestion des politiques)
         - ConnectionStrings : chaîne de connexion DB
         - Identity : paramètres de token, politique de mot de passe
         
-    ![HomeView](Images/M-KayInvoice.png)\
+    ![HomeView](Images/M-KayInvoice.png)
     
