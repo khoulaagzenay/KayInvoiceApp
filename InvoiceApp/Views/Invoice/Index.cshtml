@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Invoice>;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="contrainer p-3">
+    <div class="row pt-4 header-actions">
+        <div class="col-6">
+            <h2 class="text-primary">Invoices</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Invoice" asp-action="Create" class="btn btn-primary"> <i class="bi bi-plus-circle"></i> &nbsp; Add New Invoice </a>
+        </div>
+    </div > </></div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th >InvoiceNumber</th>
+            <th > TotalAmount</th>
+            <th>Client</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var invoice in Model)
+    {
+            <tr>
+            <td scope="row" width="30%">@invoice.InvoiceNumber</td>
+            <td width="20%" >@invoice.TotalAmount</td>
+            <td width="30%">@invoice.Client?.Name</td>
+           
+            <td>
+                    <a asp-controller="Invoice" asp-action="Edit" asp-route-Id="@invoice.Id" class="btn btn-success"> <i class="bi bi-pencil-square"></i></a>
+                    &nbsp;
+                    <a asp-controller="Invoice" asp-action="Delete" asp-route-Id="@invoice.Id" class="btn btn-warning"> <i class="bi bi-trash"></i></a>
+                    &nbsp;
+                    <a asp-controller="Invoice" asp-action="Download" asp-route-id="@invoice.Id" class="btn btn-info"> <i class="bi bi-download"></i>
+                    </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

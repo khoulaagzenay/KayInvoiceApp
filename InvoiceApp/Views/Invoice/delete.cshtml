@@ -1,0 +1,52 @@
+﻿@model InvoiceApp.ViewModels.InvoiceCreateViewModel
+
+@{
+    ViewData["Title"] = "Delete Invoice";
+}
+
+<h1>Delete Invoice</h1>
+
+<div>
+    <h4>Invoice</h4>
+    <dl class="row">
+        <dt class="col-sm-2">Number</dt>
+        <dd class="col-sm-10">@Model.InvoiceNumber</dd>
+
+        <dt class="col-sm-2">Date</dt>
+        <dd class="col-sm-10">@Model.InvoiceDate.ToString("yyyy-MM-dd")</dd>
+
+        <dt class="col-sm-2">Client</dt>
+        <dd class="col-sm-10">
+            @{
+                var clients = (IEnumerable<dynamic>)ViewBag.Clients;
+                var client = clients.FirstOrDefault(c => c.Id == Model.ClientId);
+            }
+            @client?.Name
+        </dd>
+    </dl>
+
+    <h4>Lines</h4>
+    <table class="table">
+        <thead>
+            <tr><th>Description</th><th>Qty</th><th>Unit Price</th><th>Tax</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var line in Model.InvoiceLines)
+            {
+                <tr>
+                    <td>@line.Description</td>
+                    <td>@line.Quantity</td>
+                    <td>@line.UnitPrice.ToString("0.00")</td>
+                    <td>@line.TaxRate.ToString("0.##")%</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <form asp-action="Delete" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="id" value="@(ViewBag.InvoiceId ?? 0)" />
+        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

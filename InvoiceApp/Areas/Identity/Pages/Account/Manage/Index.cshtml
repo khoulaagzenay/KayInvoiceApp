@@ -1,0 +1,121 @@
+﻿@page
+@model InvoiceApp.Areas.Identity.Pages.Account.Manage.IndexModel
+@{
+    ViewData["Title"] = "Company Profil";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<!DOCTYPE html>
+<html class="light">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - InvoiceApp</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                       
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark min-h-screen">
+    <div class="flex min-h-screen">
+
+        <main class="flex-1 p-8">
+            <div class="max-w-4xl mx-auto space-y-8">
+                <!-- Header -->
+                <div>
+                    <h1 class="text-4xl font-black text-slate-900 dark:text-white">Company Profil</h1>
+                    <p class="text-slate-500 dark:text-slate-400">Update your company's information and logo here.</p>
+                </div>
+
+                <partial name="_StatusMessage" for="StatusMessage" />
+
+                <!-- Logo Upload -->
+                <div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <img id="previewImage" src="@(string.IsNullOrEmpty(Model.Input.LogoImagesrc) ? "/images/default-profile.png" : Model.Input.LogoImagesrc)"
+                             class="rounded-lg w-24 h-24 object-cover border border-slate-300" alt="Logo" />
+                        <div>
+                            <p class="text-xl font-bold text-slate-900 dark:text-slate-50">Logo</p>
+                            <p class="text-slate-500 text-sm">Recommended size: 300x300px</p>
+                        </div>
+                    </div>
+                    <label class="cursor-pointer bg-slate-200 dark:bg-slate-800 px-4 py-2 rounded-lg text-slate-900 dark:text-slate-50 font-semibold">
+                        Upload
+                        <input asp-for="Input.LogoFile" type="file" accept="image/*" class="hidden" onchange="previewFile(this)" />
+                    </label>
+                </div>
+
+                <!-- Form -->
+                <form id="profile-form" method="post" enctype="multipart/form-data" class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800 space-y-6">
+                    <div asp-validation-summary="ModelOnly" class="text-red-500"></div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <label class="flex flex-col">
+                            <span class="text-slate-900 dark:text-slate-50 font-medium pb-2">Company Name</span>
+                            <input asp-for="Input.CompanyName" class="form-input rounded-lg border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark p-3" placeholder="Ex : DevSolutions SARL" />
+                        </label>
+
+                        <label class="flex flex-col">
+                            <span class="text-slate-900 dark:text-slate-50 font-medium pb-2">SIREN</span>
+                            <input asp-for="Input.SIREN" class="form-input rounded-lg border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark p-3" placeholder="Ex : 123 456 789" />
+                        </label>
+
+                        <label class="flex flex-col">
+                            <span class="text-slate-900 dark:text-slate-50 font-medium pb-2">Phone Number</span>
+                            <input asp-for="Input.PhoneNumber" class="form-input rounded-lg border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark p-3" placeholder="+33 6 12 34 56 78" />
+                        </label>
+
+                        <label class="flex flex-col md:col-span-2">
+                            <span class="text-slate-900 dark:text-slate-50 font-medium pb-2">Adress</span>
+                            <textarea asp-for="Input.Address" rows="3" class="form-textarea rounded-lg border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark p-3" placeholder="Adresse complète..."></textarea>
+                        </label>
+                    </div>
+
+                    <div class="flex justify-end gap-3">
+                        <a href="/" class="px-6 py-3 bg-slate-200 dark:bg-slate-800 rounded-lg text-slate-800 dark:text-white font-semibold">Cancel</a>
+                        <button type="submit" class="px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-blue-600">
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        function previewFile(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = e => document.getElementById("previewImage").src = e.target.result;
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>

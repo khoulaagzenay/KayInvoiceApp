@@ -1,0 +1,145 @@
+﻿@model InvoiceApp.ViewModels.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container-fluid py-4">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-primary mb-2">
+            <i class="bi bi-speedometer2 me-2"></i> Dashboard
+        </h2>
+        <p class="text-muted fs-5">Manage your invoices efficiently</p>
+    </div>
+
+    <div class="text-center mb-5">
+        <div class="d-flex justify-content-center flex-wrap gap-4">
+            <a asp-controller="Invoice" asp-action="Create"
+               class="action-card bg-gradient-primary text-white text-decoration-none">
+                <div class="icon-wrapper bg-primary bg-opacity-25">
+                    <i class="bi bi-file-earmark-plus"></i>
+                </div>
+                <span>New Invoice</span>
+            </a>
+
+            <a asp-controller="Client" asp-action="Create"
+               class="action-card bg-gradient-success text-white text-decoration-none">
+                <div class="icon-wrapper bg-success bg-opacity-25">
+                    <i class="bi bi-person-plus-fill"></i>
+                </div>
+                <span>New client</span>
+            </a>
+
+            <a asp-controller="Invoice" asp-action="Index"
+               class="action-card bg-gradient-info text-white text-decoration-none">
+                <div class="icon-wrapper bg-info bg-opacity-25">
+                    <i class="bi bi-journal-text"></i>
+                </div>
+                <span>All Invoices</span>
+            </a>
+
+            <a asp-controller="Client" asp-action="Index"
+               class="action-card bg-gradient-warning text-dark text-decoration-none">
+                <div class="icon-wrapper bg-warning bg-opacity-25">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+                <span>All Clients</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 rounded-4 bg-light">
+                <div class="card-body d-flex align-items-center">
+                    <div class="flex-shrink-0 bg-primary text-white p-3 rounded-3 me-3">
+                        <i class="bi bi-file-earmark-text fs-3"></i>
+                    </div>
+                    <div>
+                        <h6 class="text-muted mb-1">Total Invoices </h6>
+                        <h3 class="mb-0 fw-bold">@Model.TotalInvoices</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 rounded-4 bg-light">
+                <div class="card-body d-flex align-items-center">
+                    <div class="flex-shrink-0 bg-success text-white p-3 rounded-3 me-3">
+                        <i class="bi bi-people fs-3"></i>
+                    </div>
+                    <div>
+                        <h6 class="text-muted mb-1">Total clients</h6>
+                        <h3 class="mb-0 fw-bold">@Model.TotalClients</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 rounded-4 bg-light">
+                <div class="card-body d-flex align-items-center">
+                    <div class="flex-shrink-0 bg-warning text-white p-3 rounded-3 me-3">
+                        <i class="bi bi-cash-coin fs-3"></i>
+                    </div>
+                    <div>
+                        <h6 class="text-muted mb-1">Outstanding Balance</h6>
+                        <h3 class="mb-0 fw-bold text-warning">@Model.OutstandingBalance.ToString("C")</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .action-card {
+        width: 180px;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        font-weight: 500;
+    }
+
+        .action-card .icon-wrapper {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .action-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+        }
+
+            .action-card:hover .icon-wrapper {
+                transform: scale(1.2);
+            }
+
+    .bg-gradient-primary {
+        background: linear-gradient(135deg, #007bff 0%, #3b82f6 100%);
+    }
+
+    .bg-gradient-success {
+        background: linear-gradient(135deg, #28a745 0%, #4ade80 100%);
+    }
+
+    .bg-gradient-info {
+        background: linear-gradient(135deg, #17a2b8 0%, #38bdf8 100%);
+    }
+
+    .bg-gradient-warning {
+        background: linear-gradient(135deg, #ffc107 0%, #facc15 100%);
+    }
+</style>
